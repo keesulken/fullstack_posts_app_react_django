@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
+from publicpostsapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/posts', views.posts),
+    re_path(r'^api/v1/like_post/(?P<post_id>[0-9]+)$', views.like_post),
+    re_path(r'^api/v1/delete/(?P<post_id>[0-9]+)$', views.delete_post),
 ]
